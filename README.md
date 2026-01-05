@@ -133,11 +133,13 @@ Then restart Apache from the XAMPP Control Panel.
 
 Your machine is already running Apache (XAMPP) on port 80, so `http://2026hackernewsproject.localhost/` needs to be served by Apache.
 
+Note: `.localhost` resolves to your own machine (127.0.0.1) on modern OSes/browsers, so you typically do **not** need to edit your hosts file.
+
 ### 1) Add the Apache VirtualHost
 
 1. Open `C:\xampp\apache\conf\extra\httpd-vhosts.conf`.
 2. Ensure there is a `<VirtualHost *:80>` entry with `ServerName 2026hackernewsproject.localhost`.
-3. Its `DocumentRoot` should point at this project folder: `D:\Websites\2026-FCJamison\portfolio\2026-HackerNewsProject`.
+3. Its `DocumentRoot` should point at this project folder: `D:\Websites\2026-FCJamison\portfolio\2026HackerNewsProject`.
 4. Restart Apache in the XAMPP Control Panel.
 
 ### 2) Build the site
@@ -156,3 +158,9 @@ If you ever see Apache showing an old `index.html` instead of `index.php`, remov
 
 - Default: `http://2026hackernewsproject.localhost/`
 - Last 3 days, 500+ votes: `http://2026hackernewsproject.localhost/?days=3&min_votes=500`
+
+## Production subdomain
+
+In production you generally do **not** use `.localhost`. Keep the same “subdomain-style” URL by using a real domain you control (e.g. `https://2026hackernewsproject.yourdomain.com/`) and configuring DNS + an Apache VirtualHost with that `ServerName`.
+
+Make sure Apache/PHP can execute the Python backend, and set `HN_PYTHON` to the correct interpreter path if the server’s PATH is restricted.
